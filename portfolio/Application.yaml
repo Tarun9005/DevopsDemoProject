@@ -1,0 +1,18 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: static-website
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/Tarun9005/DevopsDemoProject# Update with your GitHub repo
+    path: k8s # Ensure k8s manifests are inside this folder
+    targetRevision: HEAD
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: default
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
